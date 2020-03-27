@@ -3,20 +3,47 @@
 #include "student.h"
 using namespace std;
 
-Student::Student(string studentID, string firstName, string lastName, string email, int age, int daysToComplete[3], Degree degreeTypes) {
-	this->studentID = studentID;
-	this->firstName = firstName;
-	this->lastName = lastName;
-	this->email = email;
-	this->age = age;
-	this->daysToComplete[3] = daysToComplete[3];
-	this->degreeTypes = degreeTypes;
+Student::Student(string studentID, string firstName, string lastName, string email, int age, int * daysToComplete, Degree degreeType) {
+	SetStudentID(studentID);
+	SetFirstName(firstName);
+	SetLastName(lastName);
+	SetEmail(email);
+	SetAge(age);
+	SetDaysToComplete(daysToComplete);
 
 	return;
 }
 
+Student::~Student() {
+
+}
+
 string Student::GetStudentID() const {
 	return studentID;
+}
+
+string Student::GetFirstName() const {
+	return firstName;
+}
+
+string Student::GetLastName() const {
+	return lastName;
+}
+
+string Student::GetEmail() const {
+	return email;
+}
+
+int Student::GetAge() const {
+	return age;
+}
+
+const int* Student::GetDaysToComplete() const {
+	return daysToComplete;
+}
+
+Degree Student::GetDegreeType() const {
+	return degreeType;
 }
 
 void Student::SetStudentID(string studentID) {
@@ -25,18 +52,10 @@ void Student::SetStudentID(string studentID) {
 	return;
 }
 
-string Student::GetFirstName() const {
-	return firstName;
-}
-
 void Student::SetFirstName(string firstName) {
 	this->firstName = firstName;
 
 	return;
-}
-
-string Student::GetLastName() const {
-	return lastName;
 }
 
 void Student::SetLastName(string lastName) {
@@ -45,33 +64,35 @@ void Student::SetLastName(string lastName) {
 	return;
 }
 
-string Student::GetEmail() const {
-	return email;
-}
-
 void Student::SetEmail(string email) {
 	this->email = email;
 
 	return;
 }
 
-int Student::GetAge() const {
-	return age;
-}
-
 void Student::SetAge(int age) {
 	this->age = age;
 }
 
-int* Student::GetDaysToComplete() const {
-	return daysToComplete;
+void Student::SetDaysToComplete(int *daysToComplete) {
+	for (int i = 0; i < 3; ++i) {
+		this->daysToComplete[i] = daysToComplete[i];
+	}
+
+	return;
 }
 
-void Student::SetDaysToComplete(int daysToComplete[])
-{
+void Student::SetDegreeType(Degree degreeType) {
+	this->degreeType = degreeType;
+
+	return;
 }
 
-void Student::print() const
-{
+void Student::print() const {
+
+}
+
+Degree Student::GetDegreeProgram() const {
+
 }
 
