@@ -5,6 +5,8 @@
 using namespace std;
 
 class Roster {
+	public:
+		Student createStudent(string input[]);
 	private:
 		Student* classRosterArray;
 };
