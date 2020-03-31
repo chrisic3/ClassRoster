@@ -7,6 +7,7 @@ using namespace std;
 
 class Student {
 	public:
+		Student();
 		Student(string studentID, string firstName, string lastName, string email, int age, int* daysToComplete, Degree degreeTypes);
 		~Student();
 		string GetStudentID() const;

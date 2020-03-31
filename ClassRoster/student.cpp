@@ -3,6 +3,8 @@
 #include "student.h"
 using namespace std;
 
+Student::Student() {}
+
 Student::Student(string studentID, string firstName, string lastName, string email, int age, int * daysToComplete, Degree degreeType) {
 	SetStudentID(studentID);
 	SetFirstName(firstName);
