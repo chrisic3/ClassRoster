@@ -95,6 +95,6 @@ void Student::print() const {
 }
 
 Degree Student::GetDegreeProgram() const {
-
+	return Degree::SOFTWARE;
 }
 

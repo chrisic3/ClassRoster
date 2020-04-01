@@ -1,3 +1,6 @@
+#include <sstream>
+#include <iostream>
+#include <string>
 #include "degree.h"
 #include "student.h"
 #include "networkStudent.h"
@@ -5,7 +8,7 @@
 #include "softwareStudent.h"
 #include "roster.h"
 
-void Roster:: add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
+void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
     int days[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 
     for (int i = 0; i < 5; ++i) {
@@ -31,5 +34,29 @@ void main() {
     "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
     "A5,Chris,Stelly,cstelly@wgu.edu,32,30,30,30,SOFTWARE" };
     
+    Roster classRoster;
+    Degree studentDegree;
 
+    for (int i = 0; i < 5; ++i) {
+        stringstream input(studentData[i]);
+        string split[9];{}
+
+        for (int i = 0; i < 9; ++i) {
+            string substring;
+            getline(input, substring, ',');
+            split[i] = substring;
+        }
+
+        if (split[8] == "NETWORK") {
+            studentDegree = Degree::NETWORK;
+        }
+        else if (split[8] == "SECURITY") {
+            studentDegree = Degree::SECURITY;
+        }
+        else if (split[8] == "SOFTWARE") {
+            studentDegree = Degree::SOFTWARE;
+        }
+
+        classRoster.add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
+    }
 }
