@@ -10,13 +10,13 @@ class Student {
 		Student();
 		Student(string studentID, string firstName, string lastName, string email, int age, int* daysToComplete, Degree degreeTypes);
 		~Student();
-		string GetStudentID() const;
-		string GetFirstName() const;
-		string GetLastName() const;
-		string GetEmail() const;
-		int GetAge() const;
-		const int* GetDaysToComplete() const;
-		Degree GetDegreeType() const;
+		string GetStudentID();
+		string GetFirstName();
+		string GetLastName();
+		string GetEmail();
+		int GetAge();
+		int* GetDaysToComplete();
+		Degree GetDegreeType();
 		void SetStudentID(string studentID);
 		void SetFirstName(string firstName);
 		void SetLastName(string lastName);
@@ -24,8 +24,8 @@ class Student {
 		void SetAge(int age);
 		void SetDaysToComplete(int *daysToComplete);
 		void SetDegreeType(Degree degreeType);
-		virtual void print() const;
-		virtual Degree GetDegreeProgram() const;
+		virtual void print();
+		virtual Degree GetDegreeProgram();
 	private:
 		string studentID;
 		string firstName;

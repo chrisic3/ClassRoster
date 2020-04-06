@@ -5,6 +5,6 @@ SecurityStudent::SecurityStudent(string studentID, string firstName, string last
 	SetDegreeType(degree);
 }
 
-Degree SecurityStudent::GetDegreeProgram() const {
+Degree SecurityStudent::GetDegreeProgram() {
 	return degreeType;
 }

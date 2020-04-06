@@ -5,6 +5,6 @@ NetworkStudent::NetworkStudent(string studentID, string firstName, string lastNa
 	SetDegreeType(degree);
 }
 
-Degree NetworkStudent::GetDegreeProgram() const {
+Degree NetworkStudent::GetDegreeProgram() {
 	return degreeType;
 }

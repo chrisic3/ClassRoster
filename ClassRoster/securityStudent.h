@@ -7,9 +7,9 @@ using namespace std;
 class SecurityStudent : public Student {
 	public:
 		SecurityStudent(string studentID, string firstName, string lastName, string email, int age, int* daysToComplete, Degree degree);
-		Degree GetDegreeProgram() const;
+		Degree GetDegreeProgram();
 	private:
-		Degree degreeType;
+		Degree degreeType = SECURITY;
 };
 
 #endif

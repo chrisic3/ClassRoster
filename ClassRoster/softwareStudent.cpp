@@ -5,6 +5,6 @@ SoftwareStudent::SoftwareStudent(string studentID, string firstName, string last
 	SetDegreeType(degree);
 }
 
-Degree SoftwareStudent::GetDegreeProgram() const {
+Degree SoftwareStudent::GetDegreeProgram() {
 	return degreeType;
 }

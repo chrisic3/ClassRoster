@@ -1,7 +1,7 @@
 #ifndef DEGREE_H
 #define DEGREE_H
 
-enum class Degree {
+enum Degree {
 	SECURITY, 
 	NETWORK, 
 	SOFTWARE

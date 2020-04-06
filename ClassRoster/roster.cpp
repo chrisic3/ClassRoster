@@ -8,19 +8,53 @@
 #include "softwareStudent.h"
 #include "roster.h"
 
+Roster::Roster() {
+    classRosterArray = 
+};
+
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
     int days[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
 
     for (int i = 0; i < 5; ++i) {
-        if (degree == Degree::NETWORK) {
-            classRosterArray[i] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
+        if (classRosterArray[i] == nullptr) {
+            if (degree == NETWORK) {
+                classRosterArray[i] = new NetworkStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
+            }
+            else if (degree == SECURITY) {
+                classRosterArray[i] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
+            }
+            else if (degree == SOFTWARE) {
+                classRosterArray[i] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
+            }
         }
-        else if (degree == Degree::SECURITY) {
-            classRosterArray[i] = new SecurityStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
-        } 
-        else if (degree == Degree::SOFTWARE) {
-            classRosterArray[i] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
+
+        break;
+    }
+
+    return;
+}
+
+void Roster::remove(string studentID) {
+    bool foundStudent = false;
+
+    for (int i = 0; i < 5; ++i) {
+        if (classRosterArray[i]->GetStudentID() == studentID) {
+            delete classRosterArray[i];
+            foundStudent = true;
+            break;
         }
+    }
+
+    if (!foundStudent) {
+        cout << "Student was not found." << endl;
+    }
+
+    return;
+}
+
+void Roster::printAll() {
+    for (int i = 0; i < 5; ++i) {
+        classRosterArray[i]->print();
     }
 
     return;
@@ -39,7 +73,7 @@ void main() {
 
     for (int i = 0; i < 5; ++i) {
         stringstream input(studentData[i]);
-        string split[9];{}
+        string split[9];
 
         for (int i = 0; i < 9; ++i) {
             string substring;
@@ -48,15 +82,17 @@ void main() {
         }
 
         if (split[8] == "NETWORK") {
-            studentDegree = Degree::NETWORK;
+            studentDegree = NETWORK;
         }
         else if (split[8] == "SECURITY") {
-            studentDegree = Degree::SECURITY;
+            studentDegree = SECURITY;
         }
         else if (split[8] == "SOFTWARE") {
-            studentDegree = Degree::SOFTWARE;
+            studentDegree = SOFTWARE;
         }
 
         classRoster.add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
     }
+
+    classRoster.printAll();
 }

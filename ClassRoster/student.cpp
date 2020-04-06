@@ -20,31 +20,31 @@ Student::~Student() {
 
 }
 
-string Student::GetStudentID() const {
+string Student::GetStudentID() {
 	return studentID;
 }
 
-string Student::GetFirstName() const {
+string Student::GetFirstName() {
 	return firstName;
 }
 
-string Student::GetLastName() const {
+string Student::GetLastName() {
 	return lastName;
 }
 
-string Student::GetEmail() const {
+string Student::GetEmail() {
 	return email;
 }
 
-int Student::GetAge() const {
+int Student::GetAge() {
 	return age;
 }
 
-const int* Student::GetDaysToComplete() const {
+int* Student::GetDaysToComplete() {
 	return daysToComplete;
 }
 
-Degree Student::GetDegreeType() const {
+Degree Student::GetDegreeType() {
 	return degreeType;
 }
 
@@ -90,11 +90,16 @@ void Student::SetDegreeType(Degree degreeType) {
 	return;
 }
 
-void Student::print() const {
+void Student::print() {
+	int* daysToComplete = GetDaysToComplete();
 
+	cout << GetStudentID() << "\tFirst Name: " << GetFirstName() << "\tLast Name: " << GetLastName() << "\tAge: " << GetAge() << "\tDays In Course: {" << daysToComplete[0] << ", "
+		<< daysToComplete[1] << ", " << daysToComplete[2] << "}\tDegree Program: " << GetDegreeProgram() << endl;
+
+	return;
 }
 
-Degree Student::GetDegreeProgram() const {
-	return Degree::SOFTWARE;
+Degree Student::GetDegreeProgram() {
+	return SOFTWARE;
 }
 
