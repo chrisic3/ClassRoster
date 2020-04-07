@@ -92,9 +92,25 @@ void Student::SetDegreeType(Degree degreeType) {
 
 void Student::print() {
 	int* daysToComplete = GetDaysToComplete();
+	string degree = "";
 
-	cout << GetStudentID() << "\tFirst Name: " << GetFirstName() << "\tLast Name: " << GetLastName() << "\tAge: " << GetAge() << "\tDays In Course: {" << daysToComplete[0] << ", "
-		<< daysToComplete[1] << ", " << daysToComplete[2] << "}\tDegree Program: " << GetDegreeProgram() << endl;
+	if (GetDegreeProgram() == 0) {
+		degree = "Security";
+	}
+	else if (GetDegreeProgram() == 1) {
+		degree = "Network";
+	}
+	else if (GetDegreeProgram() == 2) {
+		degree = "Software";
+	}
+
+	cout << GetStudentID();
+	cout << "\tFirst Name: " << GetFirstName();
+	cout << "\tLast Name: " << GetLastName();
+	cout << "\tAge: " << GetAge();
+	cout << "\tDays In Course: {" << daysToComplete[0] << ", " << daysToComplete[1] << ", " << daysToComplete[2] << "}";
+	cout << "\tDegree Program : " << degree;
+	cout << endl;
 
 	return;
 }
