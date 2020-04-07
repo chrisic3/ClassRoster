@@ -9,8 +9,14 @@
 #include "roster.h"
 
 Roster::Roster() {
-    classRosterArray = 
-};
+    for (int i = 0; i < 5; ++i) {
+        classRosterArray[i] = nullptr;
+    }
+}
+
+Roster::~Roster() {
+    delete classRosterArray;
+}
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
     int days[3] = { daysInCourse1, daysInCourse2, daysInCourse3 };
@@ -26,9 +32,9 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
             else if (degree == SOFTWARE) {
                 classRosterArray[i] = new SoftwareStudent(studentID, firstName, lastName, emailAddress, age, days, degree);
             }
-        }
 
-        break;
+            break;
+        }
     }
 
     return;
@@ -68,17 +74,17 @@ void main() {
     "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
     "A5,Chris,Stelly,cstelly@wgu.edu,32,30,30,30,SOFTWARE" };
     
-    Roster classRoster;
+    Roster *classRoster = new Roster();
     Degree studentDegree;
 
     for (int i = 0; i < 5; ++i) {
         stringstream input(studentData[i]);
         string split[9];
 
-        for (int i = 0; i < 9; ++i) {
+        for (int j = 0; j < 9; ++j) {
             string substring;
             getline(input, substring, ',');
-            split[i] = substring;
+            split[j] = substring;
         }
 
         if (split[8] == "NETWORK") {
@@ -91,8 +97,10 @@ void main() {
             studentDegree = SOFTWARE;
         }
 
-        classRoster.add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
+        classRoster->add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
     }
 
-    classRoster.printAll();
+    classRoster->printAll();
+
+    //delete classRoster;
 }
