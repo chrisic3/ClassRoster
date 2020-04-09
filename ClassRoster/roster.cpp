@@ -15,7 +15,9 @@ Roster::Roster() {
 }
 
 Roster::~Roster() {
-    delete classRosterArray;
+    for (int i = 0; i < 5; ++i) {
+        delete classRosterArray[i];
+    }
 }
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
@@ -66,6 +68,56 @@ void Roster::printAll() {
     return;
 }
 
+void Roster::printAverageDaysInCourse(string studentID) {
+    for (int i = 0; i < 5; ++i) {
+        if (classRosterArray[i]->GetStudentID == studentID) {
+            int day1 = classRosterArray[i]->GetDaysToComplete[0];
+            int day2 = classRosterArray[i]->GetDaysToComplete[1];
+            int day3 = classRosterArray[i]->GetDaysToComplete[2];
+            int avg = (day1 + day2 + day3) / 3;
+
+            cout << avg << endl;
+        }
+    }
+
+    return;
+}
+
+void Roster::printInvalidEmails() {
+    for (int i = 0; i < 5; ++i) {
+        string email = classRosterArray[i]->GetEmail();
+        bool foundAt = false;
+        bool foundPeriod = false;
+        bool foundSpace = false;
+
+        for (int j = 0; i < email.size(); ++j) {
+            if (email[j] == '@') {
+                foundAt = true;
+            }
+
+            if (email[j] == '.') {
+                foundPeriod = true;
+            }
+
+            if (email[j] == ' ') {
+                foundSpace = true;
+            }
+        }
+
+        if (!foundAt || !foundPeriod || foundSpace) {
+            cout << email << endl;
+        }
+    }
+
+    return;
+}
+
+void Roster::printByDegreeProgram(int degreeProgram) {
+
+
+    return;
+}
+
 void main() {
     const string studentData[] =
     { "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
@@ -74,7 +126,7 @@ void main() {
     "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
     "A5,Chris,Stelly,cstelly@wgu.edu,32,30,30,30,SOFTWARE" };
     
-    Roster *classRoster = new Roster();
+    Roster classRoster;
     Degree studentDegree;
 
     for (int i = 0; i < 5; ++i) {
@@ -97,10 +149,13 @@ void main() {
             studentDegree = SOFTWARE;
         }
 
-        classRoster->add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
+        classRoster.add(split[0], split[1], split[2], split[3], stoi(split[4]), stoi(split[5]), stoi(split[6]), stoi(split[7]), studentDegree);
     }
 
-    classRoster->printAll();
+    classRoster.printAll();
 
-    //delete classRoster;
+    for (int i = 0; i < 5; ++i) {
+        classRoster.printAverageDaysInCourse();
+    }
+
 }
