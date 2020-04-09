@@ -7,6 +7,7 @@
 #include "securityStudent.h"
 #include "softwareStudent.h"
 #include "roster.h"
+using namespace std;
 
 Roster::Roster() {
     for (int i = 0; i < 5; ++i) {
@@ -44,16 +45,27 @@ void Roster::add(string studentID, string firstName, string lastName, string ema
 
 void Roster::remove(string studentID) {
     bool foundStudent = false;
+    int arrayLength = *(&classRosterArray + 1) - classRosterArray;
 
-    for (int i = 0; i < 5; ++i) {
-        if (classRosterArray[i]->GetStudentID() == studentID) {
+    for (int i = 0; i < arrayLength; ++i) {
+        if (classRosterArray[i] != nullptr && classRosterArray[i]->GetStudentID() == studentID) {
             delete classRosterArray[i];
+
+            for (int j = i; j < arrayLength - 1; ++j) {
+                classRosterArray[j] = classRosterArray[j + 1];
+            }
+
+            classRosterArray[arrayLength - 1] = nullptr;
+
             foundStudent = true;
             break;
         }
     }
 
-    if (!foundStudent) {
+    if (foundStudent) {
+        cout << "Student was deleted." << endl;
+    }
+    else {
         cout << "Student was not found." << endl;
     }
 
@@ -70,13 +82,14 @@ void Roster::printAll() {
 
 void Roster::printAverageDaysInCourse(string studentID) {
     for (int i = 0; i < 5; ++i) {
-        if (classRosterArray[i]->GetStudentID == studentID) {
-            int day1 = classRosterArray[i]->GetDaysToComplete[0];
-            int day2 = classRosterArray[i]->GetDaysToComplete[1];
-            int day3 = classRosterArray[i]->GetDaysToComplete[2];
+        if (classRosterArray[i]->GetStudentID() == studentID) {
+            string name = classRosterArray[i]->GetFirstName() + " " + classRosterArray[i]->GetLastName();
+            int day1 = classRosterArray[i]->GetDaysToComplete()[0];
+            int day2 = classRosterArray[i]->GetDaysToComplete()[1];
+            int day3 = classRosterArray[i]->GetDaysToComplete()[2];
             int avg = (day1 + day2 + day3) / 3;
 
-            cout << avg << endl;
+            cout << name << "average days: " << avg << endl;
         }
     }
 
@@ -85,12 +98,13 @@ void Roster::printAverageDaysInCourse(string studentID) {
 
 void Roster::printInvalidEmails() {
     for (int i = 0; i < 5; ++i) {
+        string name = classRosterArray[i]->GetFirstName() + " " + classRosterArray[i]->GetLastName();
         string email = classRosterArray[i]->GetEmail();
         bool foundAt = false;
         bool foundPeriod = false;
         bool foundSpace = false;
 
-        for (int j = 0; i < email.size(); ++j) {
+        for (int j = 0; j < email.size(); ++j) {
             if (email[j] == '@') {
                 foundAt = true;
             }
@@ -105,7 +119,7 @@ void Roster::printInvalidEmails() {
         }
 
         if (!foundAt || !foundPeriod || foundSpace) {
-            cout << email << endl;
+            cout << name << " has invalid email: " << email << endl;
         }
     }
 
@@ -113,7 +127,11 @@ void Roster::printInvalidEmails() {
 }
 
 void Roster::printByDegreeProgram(int degreeProgram) {
-
+    for (int i = 0; i < 5; ++i) {
+        if (classRosterArray[i]->GetDegreeProgram() == degreeProgram) {
+            classRosterArray[i]->print();
+        }
+    }
 
     return;
 }
@@ -125,6 +143,12 @@ void main() {
     "A3,Jack,Napoli,The_lawyer99yahoo.com,19,20,40,33,SOFTWARE",
     "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
     "A5,Chris,Stelly,cstelly@wgu.edu,32,30,30,30,SOFTWARE" };
+
+    cout << "Scripting and Programming Applications — C867" << endl;
+    cout << "C++" << endl;
+    cout << "000650837" << endl;
+    cout << "Chris Stelly" << endl;
+    cout << endl;
     
     Roster classRoster;
     Degree studentDegree;
@@ -153,9 +177,22 @@ void main() {
     }
 
     classRoster.printAll();
+    cout << endl;
 
-    for (int i = 0; i < 5; ++i) {
-        classRoster.printAverageDaysInCourse();
-    }
+    classRoster.printInvalidEmails();
+    cout << endl;
 
+    //for (int i = 0; i < 5; ++i) {
+    //    classRoster.printAverageDaysInCourse();
+    //}
+    cout << endl;
+
+    classRoster.printByDegreeProgram(SOFTWARE);
+    cout << endl;
+
+    classRoster.remove("A3");
+    cout << endl;
+
+    classRoster.remove("A3");
+    cout << endl;
 }
