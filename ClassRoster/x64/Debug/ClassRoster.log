@@ -1,0 +1,4 @@
+﻿  roster.cpp
+C:\Users\Chris\source\repos\ClassRoster\ClassRoster\roster.cpp(46,21): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\Chris\source\repos\ClassRoster\ClassRoster\roster.cpp(141,13): warning C4326: return type of 'main' should be 'int' instead of 'void'
+  ClassRoster.vcxproj -> C:\Users\Chris\source\repos\ClassRoster\x64\Debug\ClassRoster.exe
