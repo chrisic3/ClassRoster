@@ -17,7 +17,7 @@ Student::Student(string studentID, string firstName, string lastName, string ema
 }
 
 Student::~Student() {
-
+	
 }
 
 string Student::GetStudentID() {

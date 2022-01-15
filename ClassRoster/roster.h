@@ -15,6 +15,7 @@ class Roster {
 		void printAverageDaysInCourse(string studentID);
 		void printInvalidEmails();
 		void printByDegreeProgram(int degreeProgram);
+		string getStudentID(int index);
 	private:
 		Student *classRosterArray[5];
 };

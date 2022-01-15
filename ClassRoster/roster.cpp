@@ -16,9 +16,7 @@ Roster::Roster() {
 }
 
 Roster::~Roster() {
-    for (int i = 0; i < 5; ++i) {
-        delete classRosterArray[i];
-    }
+    
 }
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, Degree degree) {
@@ -89,7 +87,7 @@ void Roster::printAverageDaysInCourse(string studentID) {
             int day3 = classRosterArray[i]->GetDaysToComplete()[2];
             int avg = (day1 + day2 + day3) / 3;
 
-            cout << name << "average days: " << avg << endl;
+            cout << name << ", average days in course: " << avg << endl;
         }
     }
 
@@ -136,6 +134,10 @@ void Roster::printByDegreeProgram(int degreeProgram) {
     return;
 }
 
+string Roster::getStudentID(int index) {
+    return classRosterArray[index]->GetStudentID();
+}
+
 void main() {
     const string studentData[] =
     { "A1,John,Smith,John1989@gm ail.com,20,30,35,40,SECURITY",
@@ -144,7 +146,7 @@ void main() {
     "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
     "A5,Chris,Stelly,cstelly@wgu.edu,32,30,30,30,SOFTWARE" };
 
-    cout << "Scripting and Programming Applications — C867" << endl;
+    cout << "Scripting and Programming Applications C867" << endl;
     cout << "C++" << endl;
     cout << "000650837" << endl;
     cout << "Chris Stelly" << endl;
@@ -182,9 +184,9 @@ void main() {
     classRoster.printInvalidEmails();
     cout << endl;
 
-    //for (int i = 0; i < 5; ++i) {
-    //    classRoster.printAverageDaysInCourse();
-    //}
+    for (int i = 0; i < 5; ++i) {
+        classRoster.printAverageDaysInCourse(classRoster.getStudentID(i));
+    }
     cout << endl;
 
     classRoster.printByDegreeProgram(SOFTWARE);
@@ -195,4 +197,6 @@ void main() {
 
     classRoster.remove("A3");
     cout << endl;
+
+    classRoster.~Roster();
 }
